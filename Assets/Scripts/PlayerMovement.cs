@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private Camera mainCam;
 
+    [Header("Visual")]
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private GameObject playerWeapon;
+    [SerializeField] private GameObject mouseLocationReference;
+
     [Header("Movement stats")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -32,6 +37,33 @@ public class PlayerMovement : MonoBehaviour
         ApplyVerticalVelocity();
 
         //Rotate the player to mouse postion
+        RotateCharacter();
+    }
+
+    private void RotateCharacter()
+    {
+        Vector3 mousePosition = GetMouseWorldPostion();
+        Vector3 flatMousePosition = new Vector3(mousePosition.x,transform.position.y + 1.5f, mousePosition.z); 
+
+        mouseLocationReference.transform.position = GetMouseWorldPostion();
+        if(characterController.isGrounded)
+            playerModel.transform.LookAt(flatMousePosition);
+        else
+            playerModel.transform.LookAt(mousePosition);
+    }
+
+    private Vector3 GetMouseWorldPostion()
+    {
+        Vector3 mousePos = Mouse.current.position.ReadValue();
+        Ray ray = mainCam.ScreenPointToRay(mousePos);
+        Vector3 mouseWorldPos = Vector3.zero;
+
+        if (Physics.Raycast(ray: ray, hitInfo: out RaycastHit hit))
+        {
+            mouseWorldPos = hit.point;
+        }
+
+        return mouseWorldPos;
     }
 
     private (Vector3 right, Vector3 left) GetCameraVector()
