@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject playerWeapon;
     [SerializeField] private GameObject mouseLocationReference;
+    [SerializeField] private GameObject mouseReticle;
 
     [Header("Movement stats")]
     [SerializeField] private float speed = 5f;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetMouseWorldPostion()
     {
         Vector3 mousePos = Mouse.current.position.ReadValue();
+        positionReticle(mousePos);
         Ray ray = mainCam.ScreenPointToRay(mousePos);
         Vector3 mouseWorldPos = Vector3.zero;
 
@@ -64,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return mouseWorldPos;
+    }
+
+    //TEMPORARY METHOD MOVE ELSE WHERE
+    private void positionReticle(Vector3 mousePos)
+    {
+        mouseReticle.transform.position = mousePos;
     }
 
     private (Vector3 right, Vector3 left) GetCameraVector()
