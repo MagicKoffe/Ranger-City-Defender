@@ -575,13 +575,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93943904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.03, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.03001, z: -0.0000001318716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2106286872}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &226072260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1570,7 @@ GameObject:
   - component: {fileID: 1087399979}
   - component: {fileID: 1087399981}
   - component: {fileID: 1087399983}
+  - component: {fileID: 1087399984}
   - component: {fileID: 1087399982}
   m_Layer: 0
   m_Name: Player
@@ -1697,6 +1698,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bc1c6131-38dd-4122-bbea-eb6d14f60fdc
     m_ActionName: 'Gameplay/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1087399984}
+        m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: babc94f5-6332-4e23-8e88-a87784afb351
+    m_ActionName: 'Gameplay/Shoot[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -1721,6 +1738,22 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 2
   gravity: -9.8
+--- !u!114 &1087399984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087399978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8d069faa1963948b34519cc4cb6f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
+  shootingPoint: {fileID: 93943905}
+  playerBullet: {fileID: 4553960690112786686, guid: 44bc4f5f8f008e244a3db9b6ff8579cb, type: 3}
+  fireRate: 0
+  bulletSpeed: 5
 --- !u!1 &1113844823
 GameObject:
   m_ObjectHideFlags: 0
