@@ -11,20 +11,26 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float fireRate;
     [SerializeField] float bulletSpeed;
 
+    private float shootTimer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        shootTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        shootTimer -= Time.deltaTime;  
     }
 
     private void Shoot()
     {
+        if (shootTimer > 0)
+            return;
+
+        shootTimer = fireRate;
         GameObject newBullet = Instantiate(playerBullet, shootingPoint.position, Quaternion.identity);
         Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
 

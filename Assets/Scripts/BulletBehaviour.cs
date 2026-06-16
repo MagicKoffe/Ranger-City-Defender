@@ -4,6 +4,11 @@ public class BulletBehaviour : MonoBehaviour
 {
     private float damage;
 
+    private void Start()
+    {
+        Destroy(gameObject, 10f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" || other.tag == "Bullet")
