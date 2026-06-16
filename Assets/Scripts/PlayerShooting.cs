@@ -10,6 +10,7 @@ public class PlayerShooting : MonoBehaviour
     [Header("Shooting stats")]
     [SerializeField] float fireRate;
     [SerializeField] float bulletSpeed;
+    [SerializeField] int bulletDamage;
 
     private float shootTimer;
 
@@ -33,14 +34,14 @@ public class PlayerShooting : MonoBehaviour
         shootTimer = fireRate;
         GameObject newBullet = Instantiate(playerBullet, shootingPoint.position, Quaternion.identity);
         Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
-
+        newBullet.GetComponent<BulletBehaviour>().setDamage(bulletDamage);
         bulletRb.AddForce(bulletSpeed * shootingPoint.forward,ForceMode.VelocityChange);
     }
 
     //--------- INPUT ------------
     public void OnShoot(InputAction.CallbackContext context)
     {
-        //Debug.Log($"Player shoot: {context.performed}");
+        
         if(context.started)
             Shoot();
     }
