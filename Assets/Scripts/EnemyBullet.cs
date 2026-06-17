@@ -21,7 +21,7 @@ public class EnemyBullet : MonoBehaviour
         Debug.Log($"Object hit: {other.gameObject.name}");
         if (other.tag == "Player")
         {
-            //Player take damage
+            other.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
         Destroy(gameObject);
     }

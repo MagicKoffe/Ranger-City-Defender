@@ -2292,6 +2292,7 @@ GameObject:
   - component: {fileID: 1087399981}
   - component: {fileID: 1087399983}
   - component: {fileID: 1087399984}
+  - component: {fileID: 1087399985}
   - component: {fileID: 1087399982}
   m_Layer: 0
   m_Name: Player
@@ -2476,6 +2477,20 @@ MonoBehaviour:
   fireRate: 0.25
   bulletSpeed: 15
   bulletDamage: 5
+--- !u!114 &1087399985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087399978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f522b6ffe638a24c9695c0392a818af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 50
+  healthBar: {fileID: 1113844825}
 --- !u!1 &1087505837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,11 +2639,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3716d8a61d9e39e4c8392e0f99cf7ed6, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.233
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
