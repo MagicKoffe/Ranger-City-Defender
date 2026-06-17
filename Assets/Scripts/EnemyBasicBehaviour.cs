@@ -5,6 +5,8 @@ public class EnemyBasicBehaviour : MonoBehaviour
 {
     [Header("Refernces")]
     [SerializeField] Transform shootingPoint;
+    [SerializeField] Transform enemyRotationObject;
+    [SerializeField] Transform enemyGunObject;
     [SerializeField] GameObject playerBullet;
 
     [Header("Shooting stats")]
@@ -31,8 +33,11 @@ public class EnemyBasicBehaviour : MonoBehaviour
 
     private void RotateToPlayer()
     {
+        //Reason we use rotation object is so that the world UI (Healthbar) will not
+        //rotate with the player and remain static
+
         Vector3 flatPositon = new Vector3(player.position.x, 1.5f, player.position.z);
-        transform.LookAt(player.position);
+        enemyRotationObject.LookAt(flatPositon);
     }
 
     private void Shoot()
@@ -45,7 +50,7 @@ public class EnemyBasicBehaviour : MonoBehaviour
         shootTimer = fireRate;
         GameObject newBullet = Instantiate(playerBullet, shootingPoint.position, Quaternion.identity);
         Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
-        newBullet.GetComponent<BulletBehaviour>().setDamage(bulletDamage);
+        newBullet.GetComponent<EnemyBullet>().setDamage(bulletDamage);
         bulletRb.AddForce(bulletSpeed * shootingPoint.forward, ForceMode.VelocityChange);
     }
 }
