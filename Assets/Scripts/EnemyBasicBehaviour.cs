@@ -1,34 +1,79 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBasicBehaviour : MonoBehaviour
 {
     [Header("Refernces")]
     [SerializeField] Transform shootingPoint;
     [SerializeField] Transform enemyRotationObject;
-    [SerializeField] Transform enemyGunObject;
     [SerializeField] GameObject playerBullet;
+    [SerializeField] GameObject alertNotification;
+
+    [Header("Behaviour stats")]
+    [SerializeField] float detectionRadius;
 
     [Header("Shooting stats")]
     [SerializeField] float fireRate;
     [SerializeField] float bulletSpeed;
     [SerializeField] int bulletDamage;
 
+    private bool targetingPlayer;
     private float shootTimer;
-    private Transform player;
+    private Transform player; 
+    private NavMeshAgent navAgent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        navAgent = GetComponent<NavMeshAgent>();
+        targetingPlayer = false;
+        alertNotification.SetActive(false);
         shootTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Shoot();
-        RotateToPlayer();
+        CheckRange();
+
+        if (targetingPlayer)
+        {
+            MoveToPlayer();
+            RotateToPlayer();
+            Shoot();
+        }
+    }
+
+    private void MoveToPlayer()
+    {
+        navAgent.SetDestination(player.position);
+    }
+
+    private void CheckRange()
+    {
+        float playerDistance = Vector3.Distance(transform.position, player.position);
+        if(playerDistance <= detectionRadius)
+        {
+            if (targetingPlayer == false)
+                StartCoroutine(AlertDetection());
+
+            targetingPlayer = true;
+        }
+        else
+        {
+            targetingPlayer = false;
+            navAgent.ResetPath();
+        }
+    }
+
+    private IEnumerator AlertDetection()
+    {
+        alertNotification.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        alertNotification.SetActive(false);
     }
 
     private void RotateToPlayer()
