@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBasicBehaviour : MonoBehaviour
+public class EnemyShooterBehaviour : MonoBehaviour
 {
     [Header("Refernces")]
     [SerializeField] Transform shootingPoint;
