@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class SceneManage : MonoBehaviour
 {
     [SerializeField] string mainMenuScene;
-    [SerializeField] string settingsScene;
     [SerializeField] string gameScene;
 
     private static SceneManage _instance;
@@ -27,16 +26,6 @@ public class SceneManage : MonoBehaviour
     public void loadGame()
     {
         SceneManager.LoadScene(gameScene, LoadSceneMode.Single);
-    }
-
-    public void loadSettingScene()
-    {
-        SceneManager.LoadScene(settingsScene, LoadSceneMode.Additive);
-    }
-
-    public void closeSettings()
-    {
-        SceneManager.UnloadSceneAsync(settingsScene);
     }
 
     public void exitGame()

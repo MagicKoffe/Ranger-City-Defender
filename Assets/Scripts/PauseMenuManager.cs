@@ -1,37 +1,39 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-    [SerializeField] Button openSettingButton;
+    [SerializeField] GameObject settingsMenu;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ToggleSettings()
     {
-        openSettingButton.onClick.AddListener(SceneManage.Instance.loadSettingScene);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TogglePause();
-        }
+        settingsMenu.SetActive(!settingsMenu.activeSelf);
     }
 
     public void TogglePause()
     {
         if (pauseMenu.activeSelf)
         {
-            Time.timeScale = 0f;
+            Time.timeScale = 1.0f;
         }
         else
         {
-            Time.timeScale = 1.0f;
+            Time.timeScale = 0f;
         }
 
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+        settingsMenu.SetActive(false);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Pause");
+            TogglePause();
+        }
     }
 }
