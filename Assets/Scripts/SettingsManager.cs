@@ -8,7 +8,7 @@ public class SettingsManager : MonoBehaviour
 
     void Start()
     {
-        exitSettingButton.onClick.AddListener(SceneManage.Instance.closeSettings);
+        //exitSettingButton.onClick.AddListener(SceneManage.Instance.closeSettings);
     }
 
 }
