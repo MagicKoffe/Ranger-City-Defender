@@ -20,7 +20,13 @@ public class SceneManage : MonoBehaviour
         else
         {
             _instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    public void loadGame()
+    {
+        SceneManager.LoadScene(gameScene, LoadSceneMode.Single);
     }
 
     public void loadSettingScene()
@@ -31,5 +37,10 @@ public class SceneManage : MonoBehaviour
     public void closeSettings()
     {
         SceneManager.UnloadSceneAsync(settingsScene);
+    }
+
+    public void exitGame()
+    {
+        //exit game
     }
 }
