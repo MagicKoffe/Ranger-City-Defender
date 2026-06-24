@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 velocity;
     private Camera mainCam;
+    private bool gameIsPaused;
 
     [Header("Visual")]
     [SerializeField] private GameObject playerModel;
@@ -20,7 +21,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
 
-    
+    //Subscribing to the events the player needs
+    private void OnEnable()
+    {
+        PauseMenuManager.togglePauseEvent += PausedToggle;
+    }
+
+    private void OnDisable()
+    {
+        PauseMenuManager.togglePauseEvent -= PausedToggle;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameIsPaused)
+            return;
+
         //Moves character left, right forward and back
         MoveCharacter();
 
@@ -104,6 +118,17 @@ public class PlayerMovement : MonoBehaviour
     {
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+    }
+
+    //EVENT LISTENER from Pause menu manager, so the player dosen't rotate when game is paused
+    private void PausedToggle(bool isPaused)
+    {
+        gameIsPaused = isPaused;
+
+        if(gameIsPaused)
+            mouseReticle.SetActive(false);
+        else
+            mouseReticle.SetActive(true);
     }
 
 

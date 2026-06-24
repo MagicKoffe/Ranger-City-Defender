@@ -13,6 +13,17 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] int bulletDamage;
 
     private float shootTimer;
+    private bool gameIsPaused;
+
+    private void OnEnable()
+    {
+        PauseMenuManager.togglePauseEvent += PausedToggle;
+    }
+
+    private void OnDisable()
+    {
+        PauseMenuManager.togglePauseEvent -= PausedToggle;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,10 +49,18 @@ public class PlayerShooting : MonoBehaviour
         bulletRb.AddForce(bulletSpeed * shootingPoint.forward,ForceMode.VelocityChange);
     }
 
+    private void PausedToggle(bool isPaused)
+    {
+        gameIsPaused = isPaused;
+
+    }
+
     //--------- INPUT ------------
     public void OnShoot(InputAction.CallbackContext context)
     {
-        
+        if (gameIsPaused)
+            return;
+
         if(context.started)
             Shoot();
     }
