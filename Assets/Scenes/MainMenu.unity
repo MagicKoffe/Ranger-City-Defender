@@ -339,9 +339,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686010887}
-        m_TargetAssemblyTypeName: SceneManage, Assembly-CSharp
-        m_MethodName: loadSettingScene
+      - m_Target: {fileID: 1761033645}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: openSettingsPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1478,6 +1478,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615591454}
   m_CullTransparentMesh: 1
+--- !u!1 &1741523072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2468312335529118724, guid: 48b95a45ff51a574380f8384386d41e3, type: 3}
+  m_PrefabInstance: {fileID: 7562577486439782514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1761033640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,8 +1495,9 @@ GameObject:
   - component: {fileID: 1761033643}
   - component: {fileID: 1761033642}
   - component: {fileID: 1761033641}
+  - component: {fileID: 1761033645}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas - Main menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1585,6 +1591,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1761033645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761033640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbed56e408fafb41850f9c2c1094a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
+  settingsPage: {fileID: 1741523072}
 --- !u!1 &1981554242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Settings Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 2468312335529118724, guid: 48b95a45ff51a574380f8384386d41e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2597047060153521137, guid: 48b95a45ff51a574380f8384386d41e3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1815,7 +1838,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 844415082}
   - {fileID: 1981554244}
-  - {fileID: 1761033644}
   - {fileID: 1439311251}
   - {fileID: 686010886}
+  - {fileID: 1761033644}
   - {fileID: 7562577486439782514}
