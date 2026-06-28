@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Visuals")]
     [SerializeField] Image healthBar;
+
+    public delegate void PlayerDeath();
+    public static event PlayerDeath OnPlayerDeath;
 
     private void Start()
     {
@@ -34,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDie()
     {
-        //Game over
+        //Send event for player death
+        OnPlayerDeath();
     }
 }

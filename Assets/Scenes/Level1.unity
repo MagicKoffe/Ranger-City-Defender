@@ -3080,7 +3080,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839537828
 MonoBehaviour:
@@ -3095,7 +3095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3768,6 +3768,7 @@ GameObject:
   - component: {fileID: 1087399984}
   - component: {fileID: 1087399985}
   - component: {fileID: 1087399982}
+  - component: {fileID: 1087399986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3946,7 +3947,6 @@ MonoBehaviour:
   playerModel: {fileID: 226072260}
   playerWeapon: {fileID: 2106286871}
   mouseLocationReference: {fileID: 957196233}
-  mouseReticle: {fileID: 839537826}
   speed: 5
   jumpHeight: 2
   gravity: -9.8
@@ -3981,6 +3981,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 50
   healthBar: {fileID: 1113844825}
+--- !u!114 &1087399986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087399978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0d667ae53ffe44b9c8ac9f70c1f0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUI
+  mouseReticle: {fileID: 839537826}
 --- !u!1 &1087505837
 GameObject:
   m_ObjectHideFlags: 0
@@ -6577,7 +6590,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1319841402}
-  - {fileID: 1087399980}
   - {fileID: 957196236}
   - {fileID: 990732478}
   - {fileID: 2030729172}
@@ -6587,3 +6599,4 @@ SceneRoots:
   - {fileID: 114759766}
   - {fileID: 806760320}
   - {fileID: 2011704174}
+  - {fileID: 1087399980}

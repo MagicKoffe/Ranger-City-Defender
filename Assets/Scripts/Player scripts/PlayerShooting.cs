@@ -14,21 +14,26 @@ public class PlayerShooting : MonoBehaviour
 
     private float shootTimer;
     private bool gameIsPaused;
+    private bool playerIsDead;
 
     private void OnEnable()
     {
         PauseMenuManager.togglePauseEvent += PausedToggle;
+        PlayerHealth.OnPlayerDeath += playerDied;
     }
 
     private void OnDisable()
     {
         PauseMenuManager.togglePauseEvent -= PausedToggle;
+        PlayerHealth.OnPlayerDeath -= playerDied;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         shootTimer = 0;
+        playerIsDead = false;
+        gameIsPaused = false;
     }
 
     // Update is called once per frame
@@ -55,13 +60,20 @@ public class PlayerShooting : MonoBehaviour
 
     }
 
+    private void playerDied()
+    {
+        playerIsDead = true;
+    }
+
     //--------- INPUT ------------
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (gameIsPaused)
+        if (gameIsPaused || playerIsDead)
             return;
 
         if(context.started)
             Shoot();
     }
+
+    
 }

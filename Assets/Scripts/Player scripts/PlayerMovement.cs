@@ -9,12 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private Camera mainCam;
     private bool gameIsPaused;
+    private bool playerIsDead;
 
     [Header("Visual")]
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject playerWeapon;
     [SerializeField] private GameObject mouseLocationReference;
-    [SerializeField] private GameObject mouseReticle;
 
     [Header("Movement stats")]
     [SerializeField] private float speed = 5f;
@@ -25,11 +25,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         PauseMenuManager.togglePauseEvent += PausedToggle;
+        PlayerHealth.OnPlayerDeath += playerDied;
     }
 
     private void OnDisable()
     {
         PauseMenuManager.togglePauseEvent -= PausedToggle;
+        PlayerHealth.OnPlayerDeath -= playerDied;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,12 +39,13 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         mainCam = Camera.main;
+        playerIsDead = false;
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (gameIsPaused)
+        if (gameIsPaused || playerIsDead)
             return;
 
         //Moves character left, right forward and back
@@ -70,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetMouseWorldPostion()
     {
         Vector3 mousePos = Mouse.current.position.ReadValue();
-        positionReticle(mousePos);
         Ray ray = mainCam.ScreenPointToRay(mousePos);
         Vector3 mouseWorldPos = Vector3.zero;
 
@@ -82,11 +84,6 @@ public class PlayerMovement : MonoBehaviour
         return mouseWorldPos;
     }
 
-    //TEMPORARY METHOD MOVE ELSE WHERE
-    private void positionReticle(Vector3 mousePos)
-    {
-        mouseReticle.transform.position = mousePos;
-    }
 
     private (Vector3 right, Vector3 left) GetCameraVector()
     {
@@ -124,11 +121,11 @@ public class PlayerMovement : MonoBehaviour
     private void PausedToggle(bool isPaused)
     {
         gameIsPaused = isPaused;
+    }
 
-        if(gameIsPaused)
-            mouseReticle.SetActive(false);
-        else
-            mouseReticle.SetActive(true);
+    private void playerDied()
+    {
+        playerIsDead = true;
     }
 
 
